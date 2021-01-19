@@ -20,18 +20,6 @@ public class NewAuthorRequest {
     @Size(max = 400)
     private String description;
 
-    @Deprecated
-    public NewAuthorRequest() {
-    }
-
-    public NewAuthorRequest(@NotBlank(message = "{author.name.blank}") String name,
-                            @NotBlank(message = "{author.email.blank}") @Email(message = "{author.email.format}") String email,
-                            @NotBlank(message = "{author.description.blank}") @Size(max = 400) String description) {
-        this.name = name;
-        this.email = email;
-        this.description = description;
-    }
-
     public String getName() {
         return name;
     }

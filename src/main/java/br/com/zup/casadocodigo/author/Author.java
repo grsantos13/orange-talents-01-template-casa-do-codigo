@@ -45,9 +45,9 @@ public class Author {
     public Author() {
     }
 
-    public Author(@NotBlank(message = "{author.name.blank}") String name,
-                  @NotBlank(message = "{author.description.blank}") @Size(max = 400) String description,
-                  @NotBlank(message = "{author.email.blank}") @Email(message = "{author.email.format}") String email) {
+    public Author(@NotBlank String name,
+                  @NotBlank @Size(max = 400) String description,
+                  @NotBlank @Email String email) {
         this.name = name;
         this.description = description;
         this.email = email;
@@ -73,14 +73,4 @@ public class Author {
         return creationInstance;
     }
 
-    @Override
-    public String toString() {
-        return "Author{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", email='" + email + '\'' +
-                ", creationInstance=" + creationInstance +
-                '}';
-    }
 }
