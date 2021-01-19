@@ -1,5 +1,7 @@
 package br.com.zup.casadocodigo.author;
 
+import br.com.zup.casadocodigo.validation.annotation.Unique;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -11,6 +13,7 @@ public class NewAuthorRequest {
 
     @NotBlank(message = "{author.email.blank}")
     @Email(message = "{author.email.format}")
+    @Unique(field = "email", domainClass = Author.class)
     private String email;
 
     @NotBlank(message = "{author.description.blank}")
