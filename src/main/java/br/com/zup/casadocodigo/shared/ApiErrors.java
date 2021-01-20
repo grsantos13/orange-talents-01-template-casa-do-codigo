@@ -1,20 +1,16 @@
 package br.com.zup.casadocodigo.shared;
 
-import org.springframework.validation.FieldError;
-
-import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ApiErrors {
-    Map<String, Object> errors = new HashMap<>();
+    List<String> errors = new ArrayList<>();
 
-    public ApiErrors(List<FieldError> list) {
-        list.forEach( f -> errors.put(f.getField(), f.getDefaultMessage()));
+    public ApiErrors(List<String> list) {
+        this.errors = list;
     }
 
-    public Map<String, Object> getErrors() {
+    public List<String> getErrors() {
         return errors;
     }
 }
