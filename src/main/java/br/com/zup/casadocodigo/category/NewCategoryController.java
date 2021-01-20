@@ -21,7 +21,7 @@ public class NewCategoryController {
     @PostMapping
     @Transactional
     public ResponseEntity<Category> createCategory(@RequestBody @Valid NewCategoryRequest categoryRequest){
-        Category category = categoryRequest.toModel();
+        Category category = new Category(categoryRequest.getName());
         manager.persist(category);
         return ResponseEntity.ok(category);
     }

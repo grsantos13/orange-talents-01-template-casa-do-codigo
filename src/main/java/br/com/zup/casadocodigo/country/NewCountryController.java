@@ -21,7 +21,7 @@ public class NewCountryController {
     @PostMapping
     @Transactional
     public ResponseEntity<Country> createCountry(@RequestBody @Valid NewCountryRequest countryRequest){
-        Country country = countryRequest.toModel();
+        Country country = new Country(countryRequest.getName());
         manager.persist(country);
         return ResponseEntity.ok(country);
     }

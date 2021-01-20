@@ -13,8 +13,4 @@ public class NewCategoryRequest {
     public String getName() {
         return name;
     }
-
-    public Category toModel(){
-        return new Category(this.name);
-    }
 }

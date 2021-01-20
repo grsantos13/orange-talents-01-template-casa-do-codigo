@@ -13,8 +13,4 @@ public class NewCountryRequest {
     public String getName() {
         return name;
     }
-
-    public Country toModel() {
-        return new Country(this.name);
-    }
 }
