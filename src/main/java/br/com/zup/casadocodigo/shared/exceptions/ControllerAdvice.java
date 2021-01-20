@@ -28,4 +28,10 @@ public class ControllerAdvice {
     public ApiErrors resourceNotFoundExceptionHandler(ResourceNotFoundException e){
         return new ApiErrors(Arrays.asList(e.getMessage()));
     }
+
+    @ExceptionHandler(IllegalStateException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiErrors illegalStateExceptionHandler(IllegalStateException e){
+        return new ApiErrors(Arrays.asList(e.getMessage()));
+    }
 }

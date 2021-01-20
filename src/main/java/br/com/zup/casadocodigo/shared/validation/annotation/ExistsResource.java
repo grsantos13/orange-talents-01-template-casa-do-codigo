@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExistsResource {
 
-    String message() default "{br.com.zup.casadocodigo.existsResource}";
+    String message() default "{br.com.zup.casadocodigo.exists}";
 
     Class<?>[] groups() default {};
 
