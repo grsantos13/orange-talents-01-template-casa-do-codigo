@@ -69,6 +69,10 @@ public class Book {
     @JoinColumn(name = "author_id", nullable = false, foreignKey = @ForeignKey(name = "book_author_fk"))
     private Author author;
 
+    @Deprecated
+    public Book() {
+    }
+
     public Book(@NotBlank String title,
                 @NotBlank @Size(max = 500) String synthesis,
                 String summary,
@@ -127,5 +131,12 @@ public class Book {
 
     public Author getAuthor() {
         return author;
+    }
+
+    public SimpleBookResponse toSimpleBookResponse(){
+        return new SimpleBookResponse(
+                this.id,
+                this.title
+        );
     }
 }
