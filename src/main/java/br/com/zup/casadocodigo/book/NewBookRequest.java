@@ -2,7 +2,7 @@ package br.com.zup.casadocodigo.book;
 
 import br.com.zup.casadocodigo.author.Author;
 import br.com.zup.casadocodigo.category.Category;
-import br.com.zup.casadocodigo.validation.annotation.ExistsId;
+import br.com.zup.casadocodigo.shared.validation.annotation.ExistsId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.EntityManager;

@@ -1,6 +1,6 @@
-package br.com.zup.casadocodigo.validation.annotation;
+package br.com.zup.casadocodigo.shared.validation.annotation;
 
-import br.com.zup.casadocodigo.validation.validator.UniqueValidator;
+import br.com.zup.casadocodigo.shared.validation.validator.ExistsIdValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -11,12 +11,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = UniqueValidator.class)
+@Constraint(validatedBy = ExistsIdValidator.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Unique {
+public @interface ExistsId {
 
-    String message() default "{br.com.zup.casadocodigo.unique}";
+    String message() default "{br.com.zup.casadocodigo.existsId}";
 
     Class<?>[] groups() default {};
 

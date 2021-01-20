@@ -1,6 +1,6 @@
 package br.com.zup.casadocodigo.category;
 
-import br.com.zup.casadocodigo.validation.annotation.Unique;
+import br.com.zup.casadocodigo.shared.validation.annotation.Unique;
 
 import javax.validation.constraints.NotBlank;
 

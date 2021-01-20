@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.shared;
+package br.com.zup.casadocodigo.shared.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

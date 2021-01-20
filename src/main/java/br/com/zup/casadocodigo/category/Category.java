@@ -1,7 +1,5 @@
 package br.com.zup.casadocodigo.category;
 
-import br.com.zup.casadocodigo.validation.annotation.Unique;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
