@@ -48,10 +48,10 @@ public class Book {
     @Min(value = 20, message = "{book.price.min}")
     private BigDecimal price;
 
-    @NotNull(message = "{book.pageNumber.null}")
+    @NotNull(message = "{book.totalPages.null}")
     @Column(nullable = false)
-    @Min(value = 100, message = "{book.pageNumber.min}")
-    private Integer pageNumber;
+    @Min(value = 100, message = "{book.totalPages.min}")
+    private Integer totalPages;
 
     @NotBlank(message = "{book.isbn.blank}")
     private String isbn;
@@ -73,7 +73,7 @@ public class Book {
                 @NotBlank @Size(max = 500) String synthesis,
                 String summary,
                 @NotNull @Min(value = 20) BigDecimal price,
-                @NotNull @Min(value = 100) Integer pageNumber,
+                @NotNull @Min(value = 100) Integer totalPages,
                 @NotBlank String isbn,
                 @Future LocalDate releaseDate,
                 @NotNull Category category,
@@ -82,7 +82,7 @@ public class Book {
         this.synthesis = synthesis;
         this.summary = summary;
         this.price = price;
-        this.pageNumber = pageNumber;
+        this.totalPages = totalPages;
         this.isbn = isbn;
         this.releaseDate = releaseDate;
         this.category = category;
@@ -109,8 +109,8 @@ public class Book {
         return price;
     }
 
-    public Integer getPageNumber() {
-        return pageNumber;
+    public Integer getTotalPages() {
+        return totalPages;
     }
 
     public String getIsbn() {

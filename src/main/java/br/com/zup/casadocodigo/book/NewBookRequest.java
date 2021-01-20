@@ -29,9 +29,9 @@ public class NewBookRequest {
     @Min(value = 20, message = "{book.price.min}")
     private BigDecimal price;
 
-    @NotNull(message = "{book.pageNumber.null}")
-    @Min(value = 100, message = "{book.pageNumber.min}")
-    private Integer pageNumber;
+    @NotNull(message = "{book.totalPages.null}")
+    @Min(value = 100, message = "{book.totalPages.min}")
+    private Integer totalPages;
 
     @NotBlank(message = "{book.isbn.blank}")
     private String isbn;
@@ -48,7 +48,7 @@ public class NewBookRequest {
     @ExistsId(field = "id", domainClass = Author.class)
     private Long authorId;
 
-    public Book toModel(EntityManager manager){
+    public Book toModel(EntityManager manager) {
         Author author = manager.find(Author.class, this.authorId);
         Category category = manager.find(Category.class, this.categoryId);
         return new Book(
@@ -56,7 +56,7 @@ public class NewBookRequest {
                 this.synthesis,
                 this.summary,
                 this.price,
-                this.pageNumber,
+                this.totalPages,
                 this.isbn,
                 this.releaseDate,
                 category,
@@ -64,5 +64,39 @@ public class NewBookRequest {
         );
     }
 
+    public String getTitle() {
+        return title;
+    }
 
+    public String getSynthesis() {
+        return synthesis;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Integer getTotalPages() {
+        return totalPages;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
 }
