@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.author;
+package br.com.zup.casadocodigo.autor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,42 +14,42 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "author", uniqueConstraints = {
+@Table(name = "autor", uniqueConstraints = {
         @UniqueConstraint(name = "author_email_uk", columnNames = {"email"})
 })
-public class Author {
+public class Autor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "{author.name.blank}")
+    @NotBlank(message = "{autor.nome.blank}")
     @Column(nullable = false)
-    private String name;
+    private String nome;
 
-    @NotBlank(message = "{author.description.blank}")
+    @NotBlank(message = "{autor.descricao.blank}")
     @Column(nullable = false)
     @Size(max = 400)
-    private String description;
+    private String descricao;
 
-    @NotBlank(message = "{author.email.blank}")
+    @NotBlank(message = "{autor.email.blank}")
     @Column(nullable = false)
-    @Email(message = "{author.email.format}")
+    @Email(message = "{autor.email.format}")
     private String email;
 
-    @NotNull(message = "{author.creationInstance.null}")
+    @NotNull(message = "{autor.instanteCriacao.null}")
     @Column(nullable = false)
-    private LocalDateTime creationInstance = LocalDateTime.now();
+    private LocalDateTime instanteCriacao = LocalDateTime.now();
 
     @Deprecated
-    public Author() {
+    public Autor() {
     }
 
-    public Author(@NotBlank String name,
-                  @NotBlank @Size(max = 400) String description,
-                  @NotBlank @Email String email) {
-        this.name = name;
-        this.description = description;
+    public Autor(@NotBlank String nome,
+                 @NotBlank @Size(max = 400) String descricao,
+                 @NotBlank @Email String email) {
+        this.nome = nome;
+        this.descricao = descricao;
         this.email = email;
     }
 
@@ -57,20 +57,19 @@ public class Author {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescricao() {
+        return descricao;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public LocalDateTime getCreationInstance() {
-        return creationInstance;
+    public LocalDateTime getInstanteCriacao() {
+        return instanteCriacao;
     }
-
 }

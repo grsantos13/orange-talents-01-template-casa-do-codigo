@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.book;
+package br.com.zup.casadocodigo.livro;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,24 +14,24 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/books")
-public class NewBookController {
+@RequestMapping("/livros")
+public class CadastraLivroController {
 
     @PersistenceContext
     private EntityManager manager;
 
     @PostMapping
     @Transactional
-    public ResponseEntity<FullBookResponse> createBook(@RequestBody @Valid NewBookRequest bookRequest,
-                                                       UriComponentsBuilder builder){
-        Book book = bookRequest.toModel(manager);
-        manager.persist(book);
+    public ResponseEntity<LivroComDetalhesResponse> cadastrarLivro(@RequestBody @Valid CadastraLivroRequest livroRequest,
+                                                               UriComponentsBuilder builder){
+        Livro livro = livroRequest.toModel(manager);
+        manager.persist(livro);
 
         URI location = builder.path("/books/{id:\\d+}")
-                    .buildAndExpand(book.getId())
+                    .buildAndExpand(livro.getId())
                     .toUri();
 
-        FullBookResponse response = book.toFullBookResponse();
+        LivroComDetalhesResponse response = livro.toLivroComDetalhesResponse();
         return ResponseEntity.ok().location(location).body(response);
     }
 

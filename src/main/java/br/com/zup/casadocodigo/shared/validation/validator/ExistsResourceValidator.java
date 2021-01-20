@@ -37,7 +37,7 @@ public class ExistsResourceValidator implements ConstraintValidator<ExistsResour
         query.setParameter("value", value);
         List<?> resultList = query.getResultList();
         Assert.state(resultList.size() > 0,
-                messageSource.getMessage("br.com.zup.casadocodigo.exists", new Object[]{clazz.getSimpleName(), value, attribute}, LocaleContextHolder.getLocale()));
+                messageSource.getMessage("br.com.zup.casadocodigo.exists", new Object[]{clazz.getSimpleName(), attribute, value}, LocaleContextHolder.getLocale()));
         return !resultList.isEmpty();
     }
 }

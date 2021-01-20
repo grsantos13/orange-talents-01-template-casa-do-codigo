@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.country;
+package br.com.zup.casadocodigo.categoria;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,17 +12,17 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/countries")
-public class NewCountryController {
+@RequestMapping("/categorias")
+public class CadastraCategoriaController {
 
     @PersistenceContext
     private EntityManager manager;
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Country> createCountry(@RequestBody @Valid NewCountryRequest countryRequest){
-        Country country = new Country(countryRequest.getName());
-        manager.persist(country);
-        return ResponseEntity.ok(country);
+    public ResponseEntity<Categoria> cadastrarCategoria(@RequestBody @Valid CadastraCategoriaRequest categoriaRequest){
+        Categoria categoria = new Categoria(categoriaRequest.getNome());
+        manager.persist(categoria);
+        return ResponseEntity.ok(categoria);
     }
 }

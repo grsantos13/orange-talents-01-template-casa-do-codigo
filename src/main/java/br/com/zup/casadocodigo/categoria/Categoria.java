@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.category;
+package br.com.zup.casadocodigo.categoria;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,32 +10,32 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "category", uniqueConstraints = {
-        @UniqueConstraint(name = "category_name_uk", columnNames = {"name"})
+@Table(name = "categoria", uniqueConstraints = {
+        @UniqueConstraint(name = "categoria_nome_uk", columnNames = {"nome"})
 })
-public class Category {
+public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "{category.name.blank}")
+    @NotBlank(message = "{categoria.nome.blank}")
     @Column(nullable = false)
-    private String name;
+    private String nome;
 
     @Deprecated
-    public Category() {
+    public Categoria() {
     }
 
-    public Category(@NotBlank String name) {
-        this.name = name;
+    public Categoria(@NotBlank String nome) {
+        this.nome = nome;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 }

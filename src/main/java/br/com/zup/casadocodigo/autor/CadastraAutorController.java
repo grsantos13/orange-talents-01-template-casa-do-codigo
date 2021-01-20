@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.state;
+package br.com.zup.casadocodigo.autor;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,18 +12,16 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/states")
-public class NewStateController {
-
+@RequestMapping("/autores")
+public class CadastraAutorController {
     @PersistenceContext
     private EntityManager manager;
 
     @PostMapping
     @Transactional
-    public ResponseEntity<StateResponse> createState(@RequestBody @Valid NewStateRequest stateRequest){
-        State state = stateRequest.toModel(manager);
-        manager.persist(state);
-        StateResponse response = state.toResponse();
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Autor> cadastraAutor(@RequestBody @Valid CadastraAutorRequest autorRequest){
+        Autor autor = autorRequest.toModel();
+        manager.persist(autor);
+        return ResponseEntity.ok(autor);
     }
 }

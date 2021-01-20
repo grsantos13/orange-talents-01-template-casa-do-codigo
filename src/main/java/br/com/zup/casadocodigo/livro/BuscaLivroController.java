@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.book;
+package br.com.zup.casadocodigo.livro;
 
 import br.com.zup.casadocodigo.shared.exceptions.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -14,30 +14,30 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/books")
-public class FindBookController {
+@RequestMapping("/livros")
+public class BuscaLivroController {
 
     @PersistenceContext
     private EntityManager manager;
 
     @GetMapping
     @Transactional
-    public ResponseEntity<List<SimpleBookResponse>> getAllBooks(){
-        List<Book> books = manager.createQuery("select b from Book b").getResultList();
-        List<SimpleBookResponse> responseList = books.stream()
-                .map(b -> new SimpleBookResponse(b.getId(), b.getTitle()))
+    public ResponseEntity<List<LivroSemDetalhesResponse>> buscarLivros(){
+        List<Livro> livros = manager.createQuery("select l from Livro l").getResultList();
+        List<LivroSemDetalhesResponse> lista = livros.stream()
+                .map(l -> new LivroSemDetalhesResponse(l.getId(), l.getTitulo()))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(responseList);
+        return ResponseEntity.ok(lista);
     }
 
     @GetMapping("/{id:\\d+}")
     @Transactional
     public ResponseEntity getBookById(@PathVariable("id") Long id){
-        Book book = manager.find(Book.class, id);
-        if (book == null)
+        Livro livro = manager.find(Livro.class, id);
+        if (livro == null)
             throw new ResourceNotFoundException("Não foi encontrado livro para o id " + id);
 
-        FullBookResponse response = book.toFullBookResponse();
+        LivroComDetalhesResponse response = livro.toLivroComDetalhesResponse();
         return ResponseEntity.ok(response);
     }
 }

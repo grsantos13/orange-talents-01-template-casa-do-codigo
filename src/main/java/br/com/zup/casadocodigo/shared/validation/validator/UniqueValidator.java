@@ -37,7 +37,7 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
         query.setParameter("value", value);
         List<?> resultList = query.getResultList();
         Assert.state(resultList.size() < 1,
-                messageSource.getMessage("br.com.zup.casadocodigo.unique", new Object[]{value, attribute, clazz.getSimpleName()}, LocaleContextHolder.getLocale())
+                messageSource.getMessage("br.com.zup.casadocodigo.unique", new Object[]{clazz.getSimpleName(), attribute, value}, LocaleContextHolder.getLocale())
         );
         return resultList.isEmpty();
     }
