@@ -1,6 +1,6 @@
 package br.com.zup.casadocodigo.shared.validation.validator;
 
-import br.com.zup.casadocodigo.shared.validation.annotation.ExistsId;
+import br.com.zup.casadocodigo.shared.validation.annotation.ExistsResource;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
-public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> {
+public class ExistsResourceValidator implements ConstraintValidator<ExistsResource, Object> {
 
     private String attribute;
     private Class<?> clazz;
@@ -19,7 +19,7 @@ public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> 
     private EntityManager manager;
 
     @Override
-    public void initialize(ExistsId params) {
+    public void initialize(ExistsResource params) {
         this.attribute = params.field();
         this.clazz = params.domainClass();
     }

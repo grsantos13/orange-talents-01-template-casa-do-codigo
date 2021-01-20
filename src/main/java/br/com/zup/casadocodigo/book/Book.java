@@ -139,4 +139,19 @@ public class Book {
                 this.title
         );
     }
+
+    public FullBookResponse toFullBookResponse(){
+        return new FullBookResponse(
+                this.id,
+                this.title,
+                this.synthesis,
+                this.summary,
+                this.price,
+                this.totalPages,
+                this.isbn,
+                this.releaseDate,
+                this.category.getName(),
+                this.author.getName()
+        );
+    }
 }

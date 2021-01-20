@@ -2,7 +2,7 @@ package br.com.zup.casadocodigo.book;
 
 import br.com.zup.casadocodigo.author.Author;
 import br.com.zup.casadocodigo.category.Category;
-import br.com.zup.casadocodigo.shared.validation.annotation.ExistsId;
+import br.com.zup.casadocodigo.shared.validation.annotation.ExistsResource;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.EntityManager;
@@ -41,11 +41,11 @@ public class NewBookRequest {
     private LocalDate releaseDate;
 
     @NotNull(message = "{book.category.null}")
-    @ExistsId(field = "id", domainClass = Category.class)
+    @ExistsResource(field = "id", domainClass = Category.class)
     private Long categoryId;
 
     @NotNull(message = "{book.author.null}")
-    @ExistsId(field = "id", domainClass = Author.class)
+    @ExistsResource(field = "id", domainClass = Author.class)
     private Long authorId;
 
     public Book toModel(EntityManager manager) {

@@ -44,6 +44,7 @@ public class FindBookController {
             throw new ResourceNotFoundException(
                     messageSource.getMessage("book.notFound", new Object[]{id}, LocaleContextHolder.getLocale()));
 
-        return ResponseEntity.ok(book);
+        FullBookResponse response = book.toFullBookResponse();
+        return ResponseEntity.ok(response);
     }
 }

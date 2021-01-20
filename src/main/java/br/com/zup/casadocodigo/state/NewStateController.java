@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.book;
+package br.com.zup.casadocodigo.state;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,19 +12,18 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/books")
-public class NewBookController {
+@RequestMapping("/states")
+public class NewStateController {
 
     @PersistenceContext
     private EntityManager manager;
 
     @PostMapping
     @Transactional
-    public ResponseEntity<FullBookResponse> createBook(@RequestBody @Valid NewBookRequest bookRequest){
-        Book book = bookRequest.toModel(manager);
-        manager.persist(book);
-        FullBookResponse response = book.toFullBookResponse();
+    public ResponseEntity<StateResponse> createState(@RequestBody @Valid NewStateRequest stateRequest){
+        State state = stateRequest.toModel(manager);
+        manager.persist(state);
+        StateResponse response = state.toResponse();
         return ResponseEntity.ok(response);
     }
-
 }
