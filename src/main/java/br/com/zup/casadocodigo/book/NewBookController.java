@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/books")
-public class BookController {
+public class NewBookController {
 
     @PersistenceContext
     private EntityManager manager;
@@ -29,12 +29,4 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-    @GetMapping
-    @Transactional
-    public ResponseEntity<List<SimpleBookResponse>> getAllBooks(){
-        List<Book> foundBooks = manager.createQuery("select b from Book b").getResultList();
-        List<SimpleBookResponse> returnedBooks = new ArrayList<>();
-        foundBooks.forEach(b -> returnedBooks.add(b.toSimpleBookResponse()));
-        return ResponseEntity.ok(returnedBooks);
-    }
 }
