@@ -1,9 +1,6 @@
 package br.com.zup.casadocodigo.book;
 
 import br.com.zup.casadocodigo.shared.exceptions.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +20,6 @@ public class FindBookController {
     @PersistenceContext
     private EntityManager manager;
 
-    @Autowired
-    private MessageSource messageSource;
-
     @GetMapping
     @Transactional
     public ResponseEntity<List<SimpleBookResponse>> getAllBooks(){
@@ -41,8 +35,7 @@ public class FindBookController {
     public ResponseEntity getBookById(@PathVariable("id") Long id){
         Book book = manager.find(Book.class, id);
         if (book == null)
-            throw new ResourceNotFoundException(
-                    messageSource.getMessage("book.notFound", new Object[]{id}, LocaleContextHolder.getLocale()));
+            throw new ResourceNotFoundException("Não foi encontrado livro para o id " + id);
 
         FullBookResponse response = book.toFullBookResponse();
         return ResponseEntity.ok(response);
