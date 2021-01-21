@@ -22,11 +22,11 @@ public class CadastraCompraController {
     private EntityManager manager;
 
     @Autowired
-    private EstadoPaisValidator estadoPaisValidator;
+    private EstadoPertenceAoPaisValidator estadoPertenceAoPaisValidator;
 
     @InitBinder
     public void init(WebDataBinder binder){
-        binder.addValidators(estadoPaisValidator);
+        binder.addValidators(estadoPertenceAoPaisValidator);
     }
 
     @PostMapping

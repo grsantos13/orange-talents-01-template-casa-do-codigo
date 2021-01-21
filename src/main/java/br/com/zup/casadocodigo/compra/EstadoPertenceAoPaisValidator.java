@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Component
-public class EstadoPaisValidator implements Validator {
+public class EstadoPertenceAoPaisValidator implements Validator {
 
     @PersistenceContext
     private EntityManager manager;
