@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.shared.exceptions;
+package br.com.zup.casadocodigo.compartilhado.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException{
     public ResourceNotFoundException(String message) {

@@ -69,7 +69,4 @@ public class Autor {
         return email;
     }
 
-    public LocalDateTime getInstanteCriacao() {
-        return instanteCriacao;
-    }
 }

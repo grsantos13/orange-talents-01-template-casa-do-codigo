@@ -19,9 +19,10 @@ public class CadastraAutorController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Autor> cadastraAutor(@RequestBody @Valid CadastraAutorRequest autorRequest){
+    public ResponseEntity<AutorResponse> cadastraAutor(@RequestBody @Valid NovoAutorRequest autorRequest){
         Autor autor = autorRequest.toModel();
         manager.persist(autor);
-        return ResponseEntity.ok(autor);
+        AutorResponse response = new AutorResponse(autor);
+        return ResponseEntity.ok(response);
     }
 }

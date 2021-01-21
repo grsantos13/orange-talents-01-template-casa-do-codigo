@@ -20,7 +20,7 @@ public class CadastraCategoriaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Categoria> cadastrarCategoria(@RequestBody @Valid CadastraCategoriaRequest categoriaRequest){
+    public ResponseEntity<Categoria> cadastrarCategoria(@RequestBody @Valid NovaCategoriaRequest categoriaRequest){
         Categoria categoria = new Categoria(categoriaRequest.getNome());
         manager.persist(categoria);
         return ResponseEntity.ok(categoria);

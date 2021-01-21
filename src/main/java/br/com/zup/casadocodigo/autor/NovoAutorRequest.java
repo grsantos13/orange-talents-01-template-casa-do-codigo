@@ -1,12 +1,12 @@
 package br.com.zup.casadocodigo.autor;
 
-import br.com.zup.casadocodigo.shared.validation.annotation.Unique;
+import br.com.zup.casadocodigo.compartilhado.validation.annotation.Unique;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class CadastraAutorRequest {
+public class NovoAutorRequest {
 
     @NotBlank(message = "{autor.nome.blank}")
     private String nome;

@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.config;
+package br.com.zup.casadocodigo.configuracao;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

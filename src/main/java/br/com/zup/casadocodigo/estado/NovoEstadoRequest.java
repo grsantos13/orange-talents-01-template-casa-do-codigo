@@ -1,14 +1,14 @@
 package br.com.zup.casadocodigo.estado;
 
 import br.com.zup.casadocodigo.pais.Pais;
-import br.com.zup.casadocodigo.shared.validation.annotation.ExistsResource;
-import br.com.zup.casadocodigo.shared.validation.annotation.Unique;
+import br.com.zup.casadocodigo.compartilhado.validation.annotation.ExistsResource;
+import br.com.zup.casadocodigo.compartilhado.validation.annotation.Unique;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.validation.constraints.NotBlank;
 
-public class CadastraEstadoRequest {
+public class NovoEstadoRequest {
 
     @NotBlank(message = "{estado.nome.blank}")
     @Unique(field = "nome", domainClass = Estado.class)

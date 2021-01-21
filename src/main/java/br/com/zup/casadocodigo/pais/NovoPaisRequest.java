@@ -1,10 +1,10 @@
 package br.com.zup.casadocodigo.pais;
 
-import br.com.zup.casadocodigo.shared.validation.annotation.Unique;
+import br.com.zup.casadocodigo.compartilhado.validation.annotation.Unique;
 
 import javax.validation.constraints.NotBlank;
 
-public class CadastraPaisRequest {
+public class NovoPaisRequest {
 
     @NotBlank(message = "{pais.nome.blank}")
     @Unique(field = "nome", domainClass = Pais.class)

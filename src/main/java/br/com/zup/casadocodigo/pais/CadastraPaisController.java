@@ -20,7 +20,7 @@ public class CadastraPaisController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Pais> cadastrarPais(@RequestBody @Valid CadastraPaisRequest request){
+    public ResponseEntity<Pais> cadastrarPais(@RequestBody @Valid NovoPaisRequest request){
         Pais pais = new Pais(request.getNome());
         manager.persist(pais);
         return ResponseEntity.ok(pais);

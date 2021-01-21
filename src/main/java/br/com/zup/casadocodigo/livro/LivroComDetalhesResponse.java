@@ -1,7 +1,7 @@
 package br.com.zup.casadocodigo.livro;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class LivroComDetalhesResponse {
 
@@ -19,36 +19,27 @@ public class LivroComDetalhesResponse {
 
     private String isbn;
 
-    private LocalDate dataPublicacao;
+    private String dataPublicacao;
 
     private String categoria;
 
-    private String autor;
+    private AutorProdutosResponse autor;
 
     @Deprecated
     public LivroComDetalhesResponse() {
     }
 
-    public LivroComDetalhesResponse(Long id,
-                                    String titulo,
-                                    String resumo,
-                                    String sumario,
-                                    BigDecimal preco,
-                                    Integer numeroDePaginas,
-                                    String isbn,
-                                    LocalDate dataPublicacao,
-                                    String categoria,
-                                    String autor) {
-        this.id = id;
-        this.titulo = titulo;
-        this.resumo = resumo;
-        this.sumario = sumario;
-        this.preco = preco;
-        this.numeroDePaginas = numeroDePaginas;
-        this.isbn = isbn;
-        this.dataPublicacao = dataPublicacao;
-        this.categoria = categoria;
-        this.autor = autor;
+    public LivroComDetalhesResponse(Livro livro) {
+        this.id = livro.getId();
+        this.titulo = livro.getTitulo();
+        this.resumo = livro.getResumo();
+        this.sumario = livro.getSumario();
+        this.preco = livro.getPreco();
+        this.numeroDePaginas = livro.getNumeroDePaginas();
+        this.isbn = livro.getIsbn();
+        this.dataPublicacao = livro.getDataPublicacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.categoria = livro.getCategoria().getNome();
+        this.autor = new AutorProdutosResponse(livro.getAutor().getNome(), livro.getAutor().getDescricao());
     }
 
     public Long getId() {
@@ -79,7 +70,7 @@ public class LivroComDetalhesResponse {
         return isbn;
     }
 
-    public LocalDate getDataPublicacao() {
+    public String getDataPublicacao() {
         return dataPublicacao;
     }
 
@@ -87,7 +78,7 @@ public class LivroComDetalhesResponse {
         return categoria;
     }
 
-    public String getAutor() {
+    public AutorProdutosResponse getAutor() {
         return autor;
     }
 }

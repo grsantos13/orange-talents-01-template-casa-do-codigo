@@ -1,4 +1,4 @@
-package br.com.zup.casadocodigo.shared.exceptions;
+package br.com.zup.casadocodigo.compartilhado.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;

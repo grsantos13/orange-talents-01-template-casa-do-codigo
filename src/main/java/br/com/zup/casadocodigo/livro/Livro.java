@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -62,11 +63,13 @@ public class Livro {
     @NotNull(message = "{livro.categoria.null}")
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false, foreignKey = @ForeignKey(name = "livro_categoria_fk"))
+    @Valid
     private Categoria categoria;
 
     @NotNull(message = "{livro.autor.null}")
     @ManyToOne
     @JoinColumn(name = "autor_id", nullable = false, foreignKey = @ForeignKey(name = "livro_autor_fk"))
+    @Valid
     private Autor autor;
 
     @Deprecated
@@ -80,8 +83,8 @@ public class Livro {
                  @NotNull @Min(value = 100) Integer numeroDePaginas,
                  @NotBlank String isbn,
                  @Future LocalDate dataPublicacao,
-                 @NotNull Categoria categoria,
-                 @NotNull Autor autor) {
+                 @NotNull @Valid Categoria categoria,
+                 @NotNull @Valid Autor autor) {
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;
@@ -131,27 +134,5 @@ public class Livro {
 
     public Autor getAutor() {
         return autor;
-    }
-
-    public LivroSemDetalhesResponse toLivroSemDetalhesResponse() {
-        return new LivroSemDetalhesResponse(
-                this.id,
-                this.titulo
-        );
-    }
-
-    public LivroComDetalhesResponse toLivroComDetalhesResponse() {
-        return new LivroComDetalhesResponse(
-                this.id,
-                this.titulo,
-                this.resumo,
-                this.sumario,
-                this.preco,
-                this.numeroDePaginas,
-                this.isbn,
-                this.dataPublicacao,
-                this.categoria.getNome(),
-                this.autor.getNome()
-        );
     }
 }

@@ -20,7 +20,7 @@ public class CadastraEstadoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<EstadoResponse> createState(@RequestBody @Valid CadastraEstadoRequest estadoRequest){
+    public ResponseEntity<EstadoResponse> createState(@RequestBody @Valid NovoEstadoRequest estadoRequest){
         Estado estado = estadoRequest.toModel(manager);
         manager.persist(estado);
         EstadoResponse response = estado.toResponse();

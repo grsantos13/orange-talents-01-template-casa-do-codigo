@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/livros")
+@RequestMapping("/produtos")
 public class CadastraLivroController {
 
     @PersistenceContext
@@ -22,16 +22,16 @@ public class CadastraLivroController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<LivroComDetalhesResponse> cadastrarLivro(@RequestBody @Valid CadastraLivroRequest livroRequest,
+    public ResponseEntity<LivroComDetalhesResponse> cadastrarLivro(@RequestBody @Valid NovoLivroRequest livroRequest,
                                                                UriComponentsBuilder builder){
         Livro livro = livroRequest.toModel(manager);
         manager.persist(livro);
 
-        URI location = builder.path("/books/{id:\\d+}")
+        URI location = builder.path("/produtos/{id:\\d+}")
                     .buildAndExpand(livro.getId())
                     .toUri();
 
-        LivroComDetalhesResponse response = livro.toLivroComDetalhesResponse();
+        LivroComDetalhesResponse response = new LivroComDetalhesResponse(livro);
         return ResponseEntity.ok().location(location).body(response);
     }
 

@@ -2,8 +2,10 @@ package br.com.zup.casadocodigo.livro;
 
 import br.com.zup.casadocodigo.autor.Autor;
 import br.com.zup.casadocodigo.categoria.Categoria;
-import br.com.zup.casadocodigo.shared.validation.annotation.ExistsResource;
+import br.com.zup.casadocodigo.compartilhado.validation.annotation.ExistsResource;
+import br.com.zup.casadocodigo.compartilhado.validation.annotation.Unique;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.Future;
@@ -14,9 +16,10 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class CadastraLivroRequest {
+public class NovoLivroRequest {
 
     @NotBlank(message = "{livro.titulo.blank}")
+    @Unique(field = "titulo", domainClass = Livro.class)
     private String titulo;
 
     @NotBlank(message = "{livro.resumo.blank}")
@@ -34,6 +37,7 @@ public class CadastraLivroRequest {
     private Integer numeroDePaginas;
 
     @NotBlank(message = "{livro.isbn.blank}")
+    @Unique(field = "isbn", domainClass = Livro.class)
     private String isbn;
 
     @Future(message = "{livro.dataPublicacao.future}")
@@ -87,6 +91,10 @@ public class CadastraLivroRequest {
     public Livro toModel(EntityManager manager) {
         Autor autor = manager.find(Autor.class, this.autorId);
         Categoria categoria = manager.find(Categoria.class, this.categoriaId);
+
+        Assert.state(autor != null, "Nenhum autor encontrado com id " + autorId);
+        Assert.state(categoria != null, "Nenhum autor encontrado com id " + categoriaId);
+
         return new Livro(
                 this.titulo,
                 this.resumo,
