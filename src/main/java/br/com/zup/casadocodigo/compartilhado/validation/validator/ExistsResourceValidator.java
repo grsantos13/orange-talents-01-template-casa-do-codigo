@@ -32,6 +32,9 @@ public class ExistsResourceValidator implements ConstraintValidator<ExistsResour
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
+        if (value == null){
+            return true;
+        }
         Assert.state(manager != null, "{br.com.zup.casadocodigo.contextSpring}");
         Query query = manager.createQuery("select 1 from " + clazz.getName() + " x where " + attribute + " = :value");
         query.setParameter("value", value);
