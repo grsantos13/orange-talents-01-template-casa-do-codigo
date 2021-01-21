@@ -32,7 +32,7 @@ public class BuscaLivroController {
 
     @GetMapping("/{id:\\d+}")
     @Transactional
-    public ResponseEntity getBookById(@PathVariable("id") Long id){
+    public ResponseEntity buscarLivroPeloId(@PathVariable("id") Long id){
         Livro livro = manager.find(Livro.class, id);
         if (livro == null)
             throw new ResourceNotFoundException("Não foi encontrado livro para o id " + id);
