@@ -1,12 +1,12 @@
 package br.com.zup.casadocodigo.estado;
 
-import br.com.zup.casadocodigo.pais.Pais;
 import br.com.zup.casadocodigo.compartilhado.validation.annotation.ExistsResource;
 import br.com.zup.casadocodigo.compartilhado.validation.annotation.Unique;
+import br.com.zup.casadocodigo.pais.Pais;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class NovoEstadoRequest {
 
@@ -14,26 +14,20 @@ public class NovoEstadoRequest {
     @Unique(field = "nome", domainClass = Estado.class)
     private String nome;
 
-    @NotBlank(message = "{estado.pais.blank}")
-    @ExistsResource(field = "nome", domainClass = Pais.class)
-    private String nomePais;
+    @NotNull(message = "{estado.pais.null}")
+    @ExistsResource(field = "id", domainClass = Pais.class)
+    private Long paisId;
 
     public String getNome() {
         return nome;
     }
 
-    public String getNomePais() {
-        return nomePais;
+    public Long getPaisId() {
+        return paisId;
     }
 
     public Estado toModel(EntityManager manager){
-        Pais pais = this.buscarPais(manager);
+        Pais pais = manager.find(Pais.class, paisId);
         return new Estado(this.nome, pais);
-    }
-
-    private Pais buscarPais(EntityManager manager){
-        Query query = manager.createQuery("select p from Pais p where p.nome = :nome");
-        query.setParameter("nome", nomePais);
-        return (Pais) query.getSingleResult();
     }
 }

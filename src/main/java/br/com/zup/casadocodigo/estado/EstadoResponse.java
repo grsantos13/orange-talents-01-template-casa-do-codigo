@@ -10,10 +10,10 @@ public class EstadoResponse {
     public EstadoResponse(){
     }
 
-    public EstadoResponse(Long id, String nome, String nomePais) {
-        this.id = id;
-        this.nome = nome;
-        this.nomePais = nomePais;
+    public EstadoResponse(Estado estado) {
+        this.id = estado.getId();
+        this.nome = estado.getNome();
+        this.nomePais = estado.getPais().getNome();
     }
 
     public Long getId() {

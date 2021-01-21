@@ -23,7 +23,7 @@ public class CadastraEstadoController {
     public ResponseEntity<EstadoResponse> createState(@RequestBody @Valid NovoEstadoRequest estadoRequest){
         Estado estado = estadoRequest.toModel(manager);
         manager.persist(estado);
-        EstadoResponse response = estado.toResponse();
+        EstadoResponse response = new EstadoResponse(estado);
         return ResponseEntity.ok(response);
     }
 }

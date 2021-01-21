@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -32,6 +33,7 @@ public class Estado {
     @ManyToOne
     @JoinColumn(name = "pais_id", nullable = false, foreignKey = @ForeignKey(name = "estado_pais_fk"))
     @NotNull(message = "{estado.pais.null}")
+    @Valid
     private Pais pais;
 
     @Deprecated
@@ -51,11 +53,7 @@ public class Estado {
         return nome;
     }
 
-    public Pais getCountry() {
+    public Pais getPais() {
         return pais;
-    }
-
-    public EstadoResponse toResponse() {
-        return new EstadoResponse(this.id, this.nome, this.pais.getNome());
     }
 }
