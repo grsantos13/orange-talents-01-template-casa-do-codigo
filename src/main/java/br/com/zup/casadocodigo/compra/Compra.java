@@ -3,7 +3,6 @@ package br.com.zup.casadocodigo.compra;
 import br.com.zup.casadocodigo.compartilhado.validation.annotation.CPFouCNPJ;
 import br.com.zup.casadocodigo.estado.Estado;
 import br.com.zup.casadocodigo.pais.Pais;
-import org.springframework.util.Assert;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -70,83 +69,4 @@ public class Compra {
 
     @NotBlank(message = "{compra.telefone.blank}")
     private String telefone;
-
-    @Deprecated
-    public Compra() {
-    }
-
-    public Compra(@NotBlank String nome,
-                  @NotBlank String sobrenome,
-                  @NotBlank @Email String email,
-                  @NotBlank String documento,
-                  @NotBlank String endereco,
-                  @NotBlank String complemento,
-                  @NotBlank String cidade,
-                  @NotNull Pais pais,
-                  Estado estado,
-                  @NotBlank String cep,
-                  @NotBlank String telefone) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
-        this.documento = documento;
-        this.endereco = endereco;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.pais = pais;
-        this.estado = estado;
-        this.cep = cep;
-        this.telefone = telefone;
-
-        if (pais.temEstados())
-            Assert.state(estado != null, "O estado precisa ser preenchido já que o país possui estados");
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public Pais getPais() {
-        return pais;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
 }

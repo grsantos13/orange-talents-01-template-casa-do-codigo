@@ -4,9 +4,7 @@ import br.com.zup.casadocodigo.compartilhado.validation.annotation.CPFouCNPJ;
 import br.com.zup.casadocodigo.compartilhado.validation.annotation.ExistsResource;
 import br.com.zup.casadocodigo.estado.Estado;
 import br.com.zup.casadocodigo.pais.Pais;
-import org.springframework.util.Assert;
 
-import javax.persistence.EntityManager;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -93,26 +91,4 @@ public class NovaCompraRequest {
         return telefone;
     }
 
-    public Compra toModel(EntityManager manager) {
-        Pais pais = manager.find(Pais.class, paisId);
-        Estado estado = null;
-        if (pais.temEstados()) {
-            Assert.state(estadoId != null, "O estado precisa ser preenchido já que o país possui estados");
-            estado = manager.find(Estado.class, estadoId);
-        }
-
-        return new Compra(
-                this.nome,
-                this.sobrenome,
-                this.email,
-                this.documento,
-                this.endereco,
-                this.complemento,
-                this.cidade,
-                pais,
-                estado,
-                this.cep,
-                this.telefone
-        );
-    }
 }

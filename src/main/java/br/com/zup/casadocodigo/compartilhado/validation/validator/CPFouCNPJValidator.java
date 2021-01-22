@@ -23,8 +23,8 @@ public class CPFouCNPJValidator implements ConstraintValidator<CPFouCNPJ, String
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        boolean cpfValido = cpfValidator.isValid(value, context);
-        boolean cnpjValido = cnpjValidator.isValid(value, context);
+        boolean cpfValido = cpfValidator.isValid(value, context) && value.length() == 11;
+        boolean cnpjValido = cnpjValidator.isValid(value, context) && value.length() == 14;
         return cpfValido || cnpjValido;
     }
 }

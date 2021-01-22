@@ -1,6 +1,5 @@
 package br.com.zup.casadocodigo.compra;
 
-import br.com.zup.casadocodigo.estado.Estado;
 import br.com.zup.casadocodigo.pais.Pais;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -10,8 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Component
-public class EstadoPertenceAoPaisValidator implements Validator {
-
+public class DevePreencherEstadoValidator implements Validator {
     @PersistenceContext
     private EntityManager manager;
 
@@ -22,17 +20,16 @@ public class EstadoPertenceAoPaisValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        NovaCompraRequest request = (NovaCompraRequest) target;
-
-        if (errors.hasErrors() || request.getEstadoId() == null)
+        if (errors.hasErrors())
             return;
+
+        NovaCompraRequest request = (NovaCompraRequest) target;
 
 
         Pais pais = manager.find(Pais.class, request.getPaisId());
-        Estado estado = manager.find(Estado.class, request.getEstadoId());
 
-        if (!estado.pertenceAoPais(pais)){
-            errors.rejectValue("estadoId", null, "O estado informado não é do país selecionado.");
+        if (pais.temEstados() && request.getEstadoId() == null){
+            errors.rejectValue("estadoId", null, "O estado precisa ser preenchido já que o país possui estados");
         }
     }
 }

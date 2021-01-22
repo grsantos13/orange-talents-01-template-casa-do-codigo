@@ -24,17 +24,17 @@ public class CadastraCompraController {
     @Autowired
     private EstadoPertenceAoPaisValidator estadoPertenceAoPaisValidator;
 
+    @Autowired
+    private DevePreencherEstadoValidator devePreencherEstadoValidator;
+
     @InitBinder
     public void init(WebDataBinder binder){
-        binder.addValidators(estadoPertenceAoPaisValidator);
+        binder.addValidators(estadoPertenceAoPaisValidator, devePreencherEstadoValidator);
     }
 
     @PostMapping
     @Transactional
     public ResponseEntity cadastrarCompra(@RequestBody @Valid NovaCompraRequest request){
-        Compra compra = request.toModel(manager);
-        manager.persist(compra);
-        CompraResponse response = new CompraResponse(compra);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(request);
     }
 }
