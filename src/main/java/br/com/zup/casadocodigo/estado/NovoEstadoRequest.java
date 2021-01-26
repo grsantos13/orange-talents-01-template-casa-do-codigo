@@ -3,6 +3,7 @@ package br.com.zup.casadocodigo.estado;
 import br.com.zup.casadocodigo.compartilhado.validation.annotation.ExistsResource;
 import br.com.zup.casadocodigo.compartilhado.validation.annotation.Unique;
 import br.com.zup.casadocodigo.pais.Pais;
+import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
@@ -28,6 +29,8 @@ public class NovoEstadoRequest {
 
     public Estado toModel(EntityManager manager){
         Pais pais = manager.find(Pais.class, paisId);
+        Assert.state(pais != null, "Nenhum país encontrado com id " + paisId);
+        
         return new Estado(this.nome, pais);
     }
 }
