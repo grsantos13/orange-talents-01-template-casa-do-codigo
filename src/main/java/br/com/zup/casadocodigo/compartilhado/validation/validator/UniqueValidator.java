@@ -32,13 +32,17 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        Assert.state(manager != null, "{br.com.zup.casadocodigo.contextSpring}");
+        if (value == null)
+            return true;
+
+        Assert.state(manager != null, "Verificar se a anotação foi utilizada em contexto do Spring");
+
         Query query = manager.createQuery("select 1 from " + clazz.getName() + " where " + attribute + " = :value");
         query.setParameter("value", value);
         List<?> resultList = query.getResultList();
-        Assert.state(resultList.size() < 1,
-                messageSource.getMessage("br.com.zup.casadocodigo.unique", new Object[]{clazz.getSimpleName(), attribute, value}, LocaleContextHolder.getLocale())
-        );
+
+        String messageListEmpty = messageSource.getMessage("br.com.zup.casadocodigo.unique", new Object[]{clazz.getSimpleName(), attribute, value}, LocaleContextHolder.getLocale());
+        Assert.state(resultList.size() < 1, messageListEmpty);
         return resultList.isEmpty();
     }
 }
