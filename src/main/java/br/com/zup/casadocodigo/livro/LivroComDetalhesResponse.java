@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 public class LivroComDetalhesResponse {
 
-    private Long id;
-
     private String titulo;
 
     private String resumo;
@@ -30,7 +28,6 @@ public class LivroComDetalhesResponse {
     }
 
     public LivroComDetalhesResponse(Livro livro) {
-        this.id = livro.getId();
         this.titulo = livro.getTitulo();
         this.resumo = livro.getResumo();
         this.sumario = livro.getSumario();
@@ -40,10 +37,6 @@ public class LivroComDetalhesResponse {
         this.dataPublicacao = livro.getDataPublicacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.categoria = livro.getCategoria().getNome();
         this.autor = new AutorProdutosResponse(livro.getAutor().getNome(), livro.getAutor().getDescricao());
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getTitulo() {
