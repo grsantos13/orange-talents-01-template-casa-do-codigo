@@ -24,7 +24,7 @@ public class EstadoPertenceAoPaisValidator implements Validator {
     public void validate(Object target, Errors errors) {
         NovaCompraRequest request = (NovaCompraRequest) target;
 
-        if (errors.hasErrors() || request.getEstadoId() == null)
+        if (errors.hasErrors() || request.getEstadoId() == null || request.getPaisId() == null)
             return;
 
 
