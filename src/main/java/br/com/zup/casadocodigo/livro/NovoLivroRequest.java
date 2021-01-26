@@ -19,7 +19,7 @@ import java.time.LocalDate;
 public class NovoLivroRequest {
 
     @NotBlank(message = "{livro.titulo.blank}")
-    @Unique(field = "titulo", domainClass = Livro.class)
+    @Unique(field = "titulo", domainClass = Livro.class, message = "{livro.titulo.duplicado}")
     private String titulo;
 
     @NotBlank(message = "{livro.resumo.blank}")
@@ -37,7 +37,7 @@ public class NovoLivroRequest {
     private Integer numeroDePaginas;
 
     @NotBlank(message = "{livro.isbn.blank}")
-    @Unique(field = "isbn", domainClass = Livro.class)
+    @Unique(field = "isbn", domainClass = Livro.class, message = "{livro.isbn.duplicado}")
     private String isbn;
 
     @Future(message = "{livro.dataPublicacao.future}")
@@ -45,11 +45,11 @@ public class NovoLivroRequest {
     private LocalDate dataPublicacao;
 
     @NotNull(message = "{livro.categoria.null}")
-    @ExistsResource(field = "id", domainClass = Categoria.class)
+    @ExistsResource(field = "id", domainClass = Categoria.class, message = "{livro.categoria.naoEncontrada}")
     private Long categoriaId;
 
     @NotNull(message = "{livro.author.null}")
-    @ExistsResource(field = "id", domainClass = Autor.class)
+        @ExistsResource(field = "id", domainClass = Autor.class, message = "{livro.autor.naoEncontrado}")
     private Long autorId;
 
     public String getTitulo() {

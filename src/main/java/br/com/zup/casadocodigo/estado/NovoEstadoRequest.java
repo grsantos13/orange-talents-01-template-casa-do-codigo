@@ -11,11 +11,11 @@ import javax.validation.constraints.NotNull;
 public class NovoEstadoRequest {
 
     @NotBlank(message = "{estado.nome.blank}")
-    @Unique(field = "nome", domainClass = Estado.class)
+    @Unique(field = "nome", domainClass = Estado.class, message = "{estado.nome.duplicado}")
     private String nome;
 
     @NotNull(message = "{estado.pais.null}")
-    @ExistsResource(field = "id", domainClass = Pais.class)
+    @ExistsResource(field = "id", domainClass = Pais.class, message = "{estado.pais.naoEncontrado}")
     private Long paisId;
 
     public String getNome() {

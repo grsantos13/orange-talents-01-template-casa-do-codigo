@@ -1,11 +1,12 @@
 package br.com.zup.casadocodigo.livro;
 
-import br.com.zup.casadocodigo.compartilhado.exceptions.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,7 +36,7 @@ public class BuscaLivroController {
     public ResponseEntity buscarLivroPeloId(@PathVariable("id") Long id){
         Livro livro = manager.find(Livro.class, id);
         if (livro == null)
-            throw new ResourceNotFoundException("Não foi encontrado livro para o id " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não foi encontrado livro para o id " + id);
 
         LivroComDetalhesResponse response = new LivroComDetalhesResponse(livro);
         return ResponseEntity.ok(response);

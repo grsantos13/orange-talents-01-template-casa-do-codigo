@@ -35,10 +35,10 @@ public class NovaCompraRequest {
     private String cidade;
 
     @NotNull(message = "{compra.pais.null}")
-    @ExistsResource(field = "id", domainClass = Pais.class)
+    @ExistsResource(field = "id", domainClass = Pais.class, message = "{compra.pais.naoEncontrado}")
     private Long paisId;
 
-    @ExistsResource(field = "id", domainClass = Estado.class)
+    @ExistsResource(field = "id", domainClass = Estado.class, message = "{compra.estado.naoEncontrado}")
     private Long estadoId;
 
     @NotBlank(message = "{compra.cep.blank}")

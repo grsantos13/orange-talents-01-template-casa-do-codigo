@@ -1,9 +1,6 @@
 package br.com.zup.casadocodigo.compartilhado.validation.validator;
 
 import br.com.zup.casadocodigo.compartilhado.validation.annotation.Unique;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -20,9 +17,6 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
 
     @PersistenceContext
     private EntityManager manager;
-
-    @Autowired
-    private MessageSource messageSource;
 
     @Override
     public void initialize(Unique params) {
@@ -41,8 +35,6 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
         query.setParameter("value", value);
         List<?> resultList = query.getResultList();
 
-        String messageListEmpty = messageSource.getMessage("br.com.zup.casadocodigo.unique", new Object[]{clazz.getSimpleName(), attribute, value}, LocaleContextHolder.getLocale());
-        Assert.state(resultList.size() < 1, messageListEmpty);
         return resultList.isEmpty();
     }
 }

@@ -13,7 +13,7 @@ public class NovoAutorRequest {
 
     @NotBlank(message = "{autor.email.blank}")
     @Email(message = "{autor.email.format}")
-    @Unique(field = "email", domainClass = Autor.class)
+    @Unique(field = "email", domainClass = Autor.class, message = "{autor.email.duplicado}")
     private String email;
 
     @NotBlank(message = "{autor.descricao.blank}")
