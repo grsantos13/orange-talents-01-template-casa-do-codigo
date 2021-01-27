@@ -30,7 +30,7 @@ public class NovoEstadoRequest {
     public Estado toModel(EntityManager manager){
         Pais pais = manager.find(Pais.class, paisId);
         Assert.state(pais != null, "Nenhum país encontrado com id " + paisId);
-        
+
         return new Estado(this.nome, pais);
     }
 }

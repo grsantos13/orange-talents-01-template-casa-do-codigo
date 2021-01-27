@@ -26,6 +26,7 @@ public class NovoLivroRequest {
     @Size(max = 500)
     private String resumo;
 
+    @NotBlank(message = "{livro.sumario.obrigatorio}")
     private String sumario;
 
     @NotNull(message = "{livro.preco.null}")

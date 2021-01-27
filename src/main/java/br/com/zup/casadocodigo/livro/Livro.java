@@ -42,6 +42,8 @@ public class Livro {
     @Column(nullable = false)
     private String resumo;
 
+    @NotBlank(message = "{livro.sumario.obrigatorio}")
+    @Column(nullable = false)
     private String sumario;
 
     @NotNull(message = "{livro.preco.null}")
