@@ -34,6 +34,8 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
         Query query = manager.createQuery("select 1 from " + clazz.getName() + " where " + attribute + " = :value");
         query.setParameter("value", value);
         List<?> resultList = query.getResultList();
+        
+        Assert.state(resultList.size() <= 1, "Foi encontrado mais de um " + clazz.getSimpleName() + " com o atributo " + attribute + " com valor " + value);
 
         return resultList.isEmpty();
     }
